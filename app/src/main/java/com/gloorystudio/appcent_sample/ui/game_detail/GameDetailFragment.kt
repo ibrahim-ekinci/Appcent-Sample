@@ -1,16 +1,22 @@
 package com.gloorystudio.appcent_sample.ui.game_detail
 
 
-import android.os.Bundle
-import android.view.View
+import androidx.fragment.app.viewModels
 import com.gloorystudio.appcent_sample.R
 import com.gloorystudio.appcent_sample.base.BaseFragment
 import com.gloorystudio.appcent_sample.databinding.FragmentGameDetailBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class GameDetailFragment : BaseFragment<FragmentGameDetailBinding>(R.layout.fragment_game_detail) {
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    private val viewModel: GameDetailViewModel by viewModels()
+
+    override fun initUI() {
+
     }
 
+    override fun observeData() {
+
+    }
 }

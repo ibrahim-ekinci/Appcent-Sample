@@ -12,10 +12,10 @@ import javax.inject.Inject
 
 @HiltViewModel
 class GameListViewModel @Inject constructor(
-    val repository: GameRepository
+    private val repository: GameRepository
 ) : ViewModel() {
 
-    private var curPage = 0
+    private var curPage = 1
 
     var gameList = MutableLiveData<List<GameListEntry>>(listOf())
     var loadError = MutableLiveData("")
@@ -29,7 +29,7 @@ class GameListViewModel @Inject constructor(
     fun loadGameList() {
         viewModelScope.launch {
             isLoading.value = true
-            when (val result = repository.getGameList()) {
+            when (val result = repository.getGameList(curPage)) {
                 is Resource.Success -> {
                     endReached.value = result.data!!.count == 0
                     val gameListEntry = result.data!!.results.mapIndexed { _, entry ->
@@ -42,7 +42,6 @@ class GameListViewModel @Inject constructor(
                         )
                     }
                     curPage++
-
                     loadError.value = ""
                     isLoading.value = false
                     gameList.value = gameList.value?.plus(gameListEntry)

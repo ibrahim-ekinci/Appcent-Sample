@@ -9,8 +9,9 @@ import androidx.navigation.findNavController
 import com.gloorystudio.appcent_sample.R
 import com.gloorystudio.appcent_sample.base.BaseFragment
 import com.gloorystudio.appcent_sample.databinding.FragmentSplashBinding
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class SplashFragment : BaseFragment<FragmentSplashBinding>(R.layout.fragment_splash) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

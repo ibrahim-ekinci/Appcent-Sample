@@ -28,8 +28,18 @@ open class BaseFragment<DB : ViewDataBinding>(@LayoutRes private val layoutResId
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initUI()
+        observeData()
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
+
+    open fun initUI() {}
+
+    open fun observeData() {}
 }

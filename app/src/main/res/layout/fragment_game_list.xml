@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.game_list.GameListFragment">
     <data>
 
@@ -8,10 +9,26 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/svGameSearch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/bg_container_search"
+            android:textCursorDrawable="@null"
+            app:iconifiedByDefault="false"
+            app:queryBackground="@null"
+            android:imeOptions="actionSearch"
+            app:queryHint="@string/search" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvGameList"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp"/>
     </LinearLayout>
 </layout>

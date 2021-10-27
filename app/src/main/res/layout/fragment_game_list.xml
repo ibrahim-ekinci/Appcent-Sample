@@ -6,15 +6,12 @@
 
     </data>
 
-    <FrameLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
-        <TextView
-            android:id="@+id/tv"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvGameList"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="game list" />
-
-    </FrameLayout>
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
 </layout>

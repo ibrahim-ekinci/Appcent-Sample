@@ -5,7 +5,7 @@ import androidx.databinding.BindingAdapter
 import com.squareup.picasso.Picasso
 
 object BindingAdapter {
-
+    @JvmStatic
     @BindingAdapter("urlImage")
     fun bindUrlImage(view: ImageView, imageUrl: String?) {
         if (imageUrl != null) {

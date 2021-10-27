@@ -1,6 +1,7 @@
 package com.gloorystudio.appcent_sample.ui.game_list
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -11,8 +12,8 @@ import com.gloorystudio.appcent_sample.databinding.ItemGameListBinding
 class GameListAdapter(private val gameList: ArrayList<GameListEntry>) :
     RecyclerView.Adapter<GameListAdapter.GameListViewHolder>() {
 
-    private var containerCardViewOnClick: ((GameListEntry) -> Unit)? = null
-    fun onClickItem(actionFragmentList: (GameListEntry) -> Unit) {
+    private var containerCardViewOnClick: ((GameListEntry,View) -> Unit)? = null
+    fun onClickItem(actionFragmentList: (GameListEntry, View) -> Unit) {
         this.containerCardViewOnClick = actionFragmentList
     }
 
@@ -32,11 +33,17 @@ class GameListAdapter(private val gameList: ArrayList<GameListEntry>) :
 
     override fun getItemCount(): Int = gameList.size
 
+    fun updateGameList(newList: List<GameListEntry>) {
+        gameList.clear()
+        gameList.addAll(newList)
+        notifyDataSetChanged()
+    }
+
     inner class GameListViewHolder(var binding: ItemGameListBinding) :
         RecyclerView.ViewHolder(binding.root) {
         init {
             binding.containerCardView.setOnClickListener {
-                containerCardViewOnClick?.invoke(gameList[adapterPosition])
+                containerCardViewOnClick?.invoke(gameList[adapterPosition],it)
             }
         }
 

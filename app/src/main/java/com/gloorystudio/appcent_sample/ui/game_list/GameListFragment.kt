@@ -1,5 +1,6 @@
 package com.gloorystudio.appcent_sample.ui.game_list
 
+import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.gloorystudio.appcent_sample.R
@@ -13,12 +14,20 @@ class GameListFragment : BaseFragment<FragmentGameListBinding>(R.layout.fragment
 
     private val viewModel: GameListViewModel by viewModels()
     private val gameListAdapter = GameListAdapter(arrayListOf())
+    private val viewPagerAdapter = ViewPagerAdapter(arrayListOf())
 
     override fun initUI() {
         binding.rvGameList.layoutManager = LinearLayoutManager(requireContext())
         binding.rvGameList.adapter = gameListAdapter
         gameListAdapter.onClickItem { game, view ->
             GameListFragmentDirections.actionGameListFragmentToGameDetailFragment(game.id)
+                .navigate(view)
+        }
+
+        binding.vpSlider.adapter = viewPagerAdapter
+        binding.dotsIndicator.setViewPager(binding.vpSlider)
+        viewPagerAdapter.onClickItem { gameListEntry, view ->
+            GameListFragmentDirections.actionGameListFragmentToGameDetailFragment(gameListEntry.id)
                 .navigate(view)
         }
 
@@ -29,9 +38,15 @@ class GameListFragment : BaseFragment<FragmentGameListBinding>(R.layout.fragment
             }
 
             override fun onQueryTextChange(newText: String): Boolean {
-                if (newText.length > 2 || newText.isEmpty())
+                if (newText.length > 2) {
                     gameListAdapter.filter.filter(newText)
-                else gameListAdapter.clearFilter()
+                    binding.vpSlider.visibility = View.GONE
+                    binding.dotsIndicator.visibility = View.GONE
+                } else {
+                    gameListAdapter.clearFilter()
+                    binding.vpSlider.visibility = View.VISIBLE
+                    binding.dotsIndicator.visibility = View.VISIBLE
+                }
                 return false
             }
         })
@@ -41,6 +56,7 @@ class GameListFragment : BaseFragment<FragmentGameListBinding>(R.layout.fragment
         viewModel.gameList.observe(viewLifecycleOwner, { gameList ->
             if (gameList.isNotEmpty()) {
                 gameListAdapter.updateGameList(gameList)
+                viewPagerAdapter.updateGameList(gameList.take(3))
             }
         })
     }

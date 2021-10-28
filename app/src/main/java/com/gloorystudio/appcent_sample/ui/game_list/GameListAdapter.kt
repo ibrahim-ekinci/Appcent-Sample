@@ -1,6 +1,5 @@
 package com.gloorystudio.appcent_sample.ui.game_list
 
-import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,10 +17,10 @@ class GameListAdapter(private val gameList: ArrayList<GameListEntry>) :
     RecyclerView.Adapter<GameListAdapter.GameListViewHolder>(),
     Filterable {
 
-    var filterGameList = ArrayList<GameListEntry>()
+    var defaultGameList = ArrayList<GameListEntry>()
 
     init {
-        filterGameList = gameList
+        defaultGameList.addAll(gameList)
     }
 
     private var containerCardViewOnClick: ((GameListEntry, View) -> Unit)? = null
@@ -41,17 +40,15 @@ class GameListAdapter(private val gameList: ArrayList<GameListEntry>) :
     }
 
     override fun onBindViewHolder(holder: GameListViewHolder, position: Int) =
-        holder.bind(filterGameList[position])
+        holder.bind(defaultGameList[position])
 
-    override fun getItemCount(): Int = filterGameList.size
+    override fun getItemCount(): Int = defaultGameList.size
 
     override fun getFilter(): Filter {
         return object : Filter() {
             override fun performFiltering(constraint: CharSequence?): FilterResults {
                 val charSearch = constraint.toString()
-                filterGameList = if (charSearch.isEmpty()) {
-                    gameList
-                } else {
+                if (charSearch.isNotEmpty()) {
                     val resultList = ArrayList<GameListEntry>()
                     for (row in gameList) {
                         if (row.name.lowercase(Locale.ROOT)
@@ -60,15 +57,19 @@ class GameListAdapter(private val gameList: ArrayList<GameListEntry>) :
                             resultList.add(row)
                         }
                     }
-                    resultList
+                    defaultGameList = resultList
+                } else {
+                    if (gameList.size > 3)
+                        defaultGameList =
+                            gameList.takeLast(gameList.size - 3) as ArrayList<GameListEntry>
                 }
                 val filterResults = FilterResults()
-                filterResults.values = filterGameList
+                filterResults.values = defaultGameList
                 return filterResults
             }
 
             override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
-                filterGameList = results?.values as ArrayList<GameListEntry>
+                defaultGameList = results?.values as ArrayList<GameListEntry>
                 notifyDataSetChanged()
             }
         }
@@ -79,6 +80,9 @@ class GameListAdapter(private val gameList: ArrayList<GameListEntry>) :
     fun updateGameList(newList: List<GameListEntry>) {
         gameList.clear()
         gameList.addAll(newList)
+        defaultGameList.clear()
+        if (newList.size > 3)
+            defaultGameList.addAll(newList.takeLast(newList.size - 3))
         notifyDataSetChanged()
     }
 

@@ -2,18 +2,88 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".ui.game_detail.GameDetailFragment">
-    <data>
 
+    <data>
+        <variable
+            name="game"
+            type="com.gloorystudio.appcent_sample.data.remote.models.GameDetailEntry" />
     </data>
-    <FrameLayout
+
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <!-- TODO: Update blank fragment layout -->
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/hello_blank_fragment" />
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-    </FrameLayout>
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="300dp">
+
+                <ImageView
+                    android:id="@+id/ivImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    urlImage="@{game.image}"/>
+
+                <ImageButton
+                    android:id="@+id/ivLike"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="bottom|right"
+                    android:layout_margin="20dp"
+                    android:scaleType="fitStart"
+                    android:background="@drawable/bg_container_search"
+                    android:src="@drawable/ic_like"
+                    android:padding="10dp"/>
+            </FrameLayout>
+
+            <TextView
+                android:id="@+id/tvName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:fontFamily="@font/proxi"
+                android:layout_marginTop="16dp"
+                android:textSize="28sp"
+                android:textStyle="bold"
+                android:text="@{game.name}"
+                tools:text="@tools:sample/lorem" />
+
+            <TextView
+                android:id="@+id/tvReleaseDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:fontFamily="@font/proxi"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:text="@{game.released}"
+                tools:text="@tools:sample/lorem" />
+
+            <TextView
+                android:id="@+id/tvMetaCriticRate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:fontFamily="@font/proxi"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:text="@{Integer.toString(game.metaCriticRate)}"
+                tools:text="@tools:sample/lorem" />
+
+            <TextView
+                android:id="@+id/tvDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:fontFamily="@font/proxi"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:text="@{game.description}"
+                tools:text="@tools:sample/lorem/random" />
+        </LinearLayout>
+    </ScrollView>
 </layout>

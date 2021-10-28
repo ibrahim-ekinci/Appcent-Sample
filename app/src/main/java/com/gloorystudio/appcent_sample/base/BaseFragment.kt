@@ -30,7 +30,7 @@ open class BaseFragment<DB : ViewDataBinding>(@LayoutRes private val layoutResId
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initUI()
+        initUi()
         observeData()
     }
 
@@ -39,7 +39,7 @@ open class BaseFragment<DB : ViewDataBinding>(@LayoutRes private val layoutResId
         _binding = null
     }
 
-    open fun initUI() {}
+    open fun initUi() {}
 
     open fun observeData() {}
 }

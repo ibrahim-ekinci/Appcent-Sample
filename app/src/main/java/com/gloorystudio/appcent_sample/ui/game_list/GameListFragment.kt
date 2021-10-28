@@ -16,7 +16,7 @@ class GameListFragment : BaseFragment<FragmentGameListBinding>(R.layout.fragment
     private val gameListAdapter = GameListAdapter(arrayListOf())
     private val viewPagerAdapter = ViewPagerAdapter(arrayListOf())
 
-    override fun initUI() {
+    override fun initUi() {
         binding.rvGameList.layoutManager = LinearLayoutManager(requireContext())
         binding.rvGameList.adapter = gameListAdapter
         gameListAdapter.onClickItem { game, view ->

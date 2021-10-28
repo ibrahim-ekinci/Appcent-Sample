@@ -23,16 +23,16 @@ class GameListViewModel @Inject constructor(
     var endReached = MutableLiveData(false)
 
     init {
-        loadGameList()
+        fetchGameList()
     }
 
-    fun loadGameList() {
+    fun fetchGameList() {
         viewModelScope.launch {
             isLoading.value = true
             when (val result = repository.getGameList(curPage)) {
                 is Resource.Success -> {
                     endReached.value = result.data!!.count == 0
-                    val gameListEntry = result.data!!.results.mapIndexed { _, entry ->
+                    val gameListEntry = result.data.results.mapIndexed { _, entry ->
                         GameListEntry(
                             entry.id,
                             entry.name,

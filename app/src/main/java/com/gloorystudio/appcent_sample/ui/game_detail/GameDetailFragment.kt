@@ -12,11 +12,21 @@ class GameDetailFragment : BaseFragment<FragmentGameDetailBinding>(R.layout.frag
 
     private val viewModel: GameDetailViewModel by viewModels()
 
-    override fun initUI() {
+    override fun initUi() {
+        arguments?.let {
+            val myArgs = GameDetailFragmentArgs.fromBundle(it)
+            viewModel.fetchGameData(myArgs.gameId)
+        }
+        binding.ivLike.setOnClickListener {
 
+        }
     }
 
     override fun observeData() {
-
+        viewModel.gameData.observe(viewLifecycleOwner, { gameData ->
+            gameData?.let {
+                binding.game = gameData
+            }
+        })
     }
 }

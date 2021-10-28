@@ -90,7 +90,7 @@ class GameListAdapter(private val gameList: ArrayList<GameListEntry>) :
         RecyclerView.ViewHolder(binding.root) {
         init {
             binding.containerCardView.setOnClickListener {
-                containerCardViewOnClick?.invoke(gameList[adapterPosition], it)
+                containerCardViewOnClick?.invoke(defaultGameList[adapterPosition], it)
             }
         }
 

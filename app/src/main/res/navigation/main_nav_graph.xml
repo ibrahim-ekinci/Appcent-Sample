@@ -36,4 +36,14 @@
             android:name="gameId"
             app:argType="integer" />
     </fragment>
+    <fragment
+        android:id="@+id/gameFavoriteListFragment"
+        android:name="com.gloorystudio.appcent_sample.ui.game_fav_list.GameFavoriteListFragment"
+        android:label="GameFavoriteListFragment" >
+        <action
+            android:id="@+id/action_gameFavoriteListFragment_to_gameDetailFragment"
+            app:destination="@id/gameDetailFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out" />
+    </fragment>
 </navigation>

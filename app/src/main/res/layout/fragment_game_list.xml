@@ -24,8 +24,8 @@
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/bg_container_search"
-                android:imeOptions="actionSearch"
                 android:fontFamily="@font/proxi"
+                android:imeOptions="actionSearch"
                 android:textCursorDrawable="@null"
                 app:iconifiedByDefault="false"
                 app:queryBackground="@null"
@@ -36,7 +36,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
                 android:layout_marginHorizontal="20dp"
-                android:layout_marginTop="10dp" />
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="5dp"/>
 
             <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
                 android:id="@+id/dotsIndicator"
@@ -45,10 +46,10 @@
                 android:layout_gravity="center"
                 android:layout_margin="5dp"
                 app:dotsColor="@color/orange"
-                app:selectedDotColor="@color/appcentOrange"
                 app:dotsSize="10dp"
                 app:dotsSpacing="3dp"
-                app:progressMode="true"/>
+                app:progressMode="true"
+                app:selectedDotColor="@color/appcentOrange" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvGameList"

@@ -17,7 +17,7 @@ object BindingAdapter {
                 .load(imageUrl)
                 .fit()
                 .centerCrop()
-                .placeholder(R.drawable.default_image)
+                .placeholder(R.drawable.progress_animation)
                 .into(view)
         } else {
             view.setImageBitmap(null)

@@ -5,6 +5,7 @@ import androidx.fragment.app.viewModels
 import com.gloorystudio.appcent_sample.R
 import com.gloorystudio.appcent_sample.base.BaseFragment
 import com.gloorystudio.appcent_sample.databinding.FragmentGameDetailBinding
+import com.gloorystudio.appcent_sample.ui.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -19,9 +20,9 @@ class GameDetailFragment : BaseFragment<FragmentGameDetailBinding>(R.layout.frag
             viewModel.fetchGameData(myArgs.gameId)
             viewModel.getFavoriteGame(myArgs.gameId) { isLiked ->
                 this.isLiked = isLiked
-                if (isLiked){
+                if (isLiked) {
                     binding.ivLike.setImageResource(R.drawable.ic_unlike)
-                }else{
+                } else {
                     binding.ivLike.setImageResource(R.drawable.ic_like)
                 }
             }
@@ -44,6 +45,10 @@ class GameDetailFragment : BaseFragment<FragmentGameDetailBinding>(R.layout.frag
             gameData?.let {
                 binding.game = gameData
             }
+        })
+
+        viewModel.isLoading.observe(viewLifecycleOwner, { isLoading ->
+            MainActivity.instance.showLoading(isLoading)
         })
     }
 }

@@ -6,10 +6,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.gloorystudio.appcent_sample.R
 import com.gloorystudio.appcent_sample.base.BaseFragment
 import com.gloorystudio.appcent_sample.databinding.FragmentGameListBinding
+import com.gloorystudio.appcent_sample.ui.MainActivity
 import com.gloorystudio.appcent_sample.ui.adapters.GameListAdapter
 import com.gloorystudio.appcent_sample.ui.adapters.ViewPagerAdapter
 import com.gloorystudio.appcent_sample.util.navigate
 import dagger.hilt.android.AndroidEntryPoint
+
 
 @AndroidEntryPoint
 class GameListFragment : BaseFragment<FragmentGameListBinding>(R.layout.fragment_game_list) {
@@ -58,6 +60,10 @@ class GameListFragment : BaseFragment<FragmentGameListBinding>(R.layout.fragment
                 gameListAdapter.updateGameList(gameList)
                 viewPagerAdapter.updateGameList(gameList.take(3))
             }
+        })
+
+        viewModel.isLoading.observe(viewLifecycleOwner, { isLoading ->
+            MainActivity.instance.showLoading(isLoading)
         })
     }
 }

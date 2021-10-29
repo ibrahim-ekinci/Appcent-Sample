@@ -11,6 +11,10 @@ import com.gloorystudio.appcent_sample.ui.adapters.GameListAdapter
 import com.gloorystudio.appcent_sample.ui.adapters.ViewPagerAdapter
 import com.gloorystudio.appcent_sample.util.navigate
 import dagger.hilt.android.AndroidEntryPoint
+import androidx.core.widget.NestedScrollView
+
+
+
 
 
 @AndroidEntryPoint
@@ -52,6 +56,17 @@ class GameListFragment : BaseFragment<FragmentGameListBinding>(R.layout.fragment
                 return false
             }
         })
+        /*
+        binding.nestedScrollView.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY ->
+            if (v.getChildAt(v.childCount - 1) != null) {
+                if (scrollY > oldScrollY) {
+                    if (scrollY >= v.getChildAt(v.childCount - 1).measuredHeight - v.measuredHeight) {
+                        viewModel.fetchGameList()
+                    }
+                }
+            }
+        })
+         */
     }
 
     override fun observeData() {

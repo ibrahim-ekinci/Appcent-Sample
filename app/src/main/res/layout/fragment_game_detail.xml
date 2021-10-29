@@ -35,7 +35,7 @@
                     android:layout_gravity="bottom|right"
                     android:layout_margin="20dp"
                     android:scaleType="fitStart"
-                    android:background="@drawable/bg_container_search"
+                    android:background="@drawable/bg_like"
                     android:src="@drawable/ic_like"
                     android:padding="10dp"/>
             </FrameLayout>

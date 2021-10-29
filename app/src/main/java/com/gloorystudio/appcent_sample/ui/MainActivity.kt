@@ -16,6 +16,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(R.style.Theme_AppcentSample)
         super.onCreate(savedInstanceState)
         instance = this
         binding = ActivityMainBinding.inflate(LayoutInflater.from(this))
@@ -29,8 +30,6 @@ class MainActivity : AppCompatActivity() {
 
     fun showLoading(isVisible: Boolean) {
         binding.progressBar.visibility = if (isVisible) View.VISIBLE else View.GONE
-        binding.bottomNavigationView.visibility = if (isVisible) View.GONE else View.VISIBLE
-        binding.navMainHostFragment.visibility = if (isVisible) View.GONE else View.VISIBLE
     }
 
     companion object {

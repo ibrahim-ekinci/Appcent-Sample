@@ -10,4 +10,6 @@
     <color name="gray">#616161</color>
     <color name="orange">#FF9A3E</color>
     <color name="appcentOrange">#F37400</color>
+    <color name="appcentBlue">#1D2C3F</color>
+
 </resources>

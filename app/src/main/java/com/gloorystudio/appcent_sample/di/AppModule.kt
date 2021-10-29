@@ -1,5 +1,9 @@
 package com.gloorystudio.appcent_sample.di
 
+import android.app.Application
+import android.content.Context
+import com.gloorystudio.appcent_sample.data.local.db.service.GameDao
+import com.gloorystudio.appcent_sample.data.local.db.service.GameDatabase
 import com.gloorystudio.appcent_sample.data.remote.GameApi
 import com.gloorystudio.appcent_sample.data.repository.GameRepository
 import com.gloorystudio.appcent_sample.util.Constants.BASE_URL
@@ -18,8 +22,9 @@ object AppModule {
     @Singleton
     @Provides
     fun provideGameRepository(
-        api: GameApi
-    ) = GameRepository(api)
+        api: GameApi,
+        dao: GameDao
+    ) = GameRepository(api,dao)
 
 
     @Singleton
@@ -30,5 +35,17 @@ object AppModule {
             .baseUrl(BASE_URL)
             .build()
             .create(GameApi::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun getGameDatabase(context: Application): GameDatabase {
+        return GameDatabase.invoke(context)
+    }
+
+    @Singleton
+    @Provides
+    fun getGameDao(gameDatabase: GameDatabase): GameDao {
+        return gameDatabase.gameDao()
     }
 }

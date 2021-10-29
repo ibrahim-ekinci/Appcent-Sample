@@ -1,4 +1,4 @@
-package com.gloorystudio.appcent_sample.ui.game_list
+package com.gloorystudio.appcent_sample.ui.adapters
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,14 +6,15 @@ import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.Filterable
 import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.gloorystudio.appcent_sample.R
-import com.gloorystudio.appcent_sample.data.remote.models.GameListEntry
+import com.gloorystudio.appcent_sample.data.models.GameListEntry
 import com.gloorystudio.appcent_sample.databinding.ItemGameListBinding
 import java.util.*
 import kotlin.collections.ArrayList
 
-class GameListAdapter(private val gameList: ArrayList<GameListEntry>) :
+class GameListAdapter(private var gameList: ArrayList<GameListEntry>) :
     RecyclerView.Adapter<GameListAdapter.GameListViewHolder>(),
     Filterable {
 
@@ -40,9 +41,9 @@ class GameListAdapter(private val gameList: ArrayList<GameListEntry>) :
     }
 
     override fun onBindViewHolder(holder: GameListViewHolder, position: Int) =
-        holder.bind(defaultGameList[position])
+        holder.bind(gameList[position])
 
-    override fun getItemCount(): Int = defaultGameList.size
+    override fun getItemCount(): Int = gameList.size
 
     override fun getFilter(): Filter {
         return object : Filter() {
@@ -50,26 +51,26 @@ class GameListAdapter(private val gameList: ArrayList<GameListEntry>) :
                 val charSearch = constraint.toString()
                 if (charSearch.isNotEmpty()) {
                     val resultList = ArrayList<GameListEntry>()
-                    for (row in gameList) {
+                    for (row in defaultGameList) {
                         if (row.name.lowercase(Locale.ROOT)
                                 .contains(charSearch.lowercase(Locale.ROOT))
                         ) {
                             resultList.add(row)
                         }
                     }
-                    defaultGameList = resultList
+                    gameList = resultList
                 } else {
-                    if (gameList.size > 3)
-                        defaultGameList =
-                            gameList.takeLast(gameList.size - 3) as ArrayList<GameListEntry>
+                    if (defaultGameList.size > 3)
+                        gameList =
+                            defaultGameList.takeLast(defaultGameList.size - 3) as ArrayList<GameListEntry>
                 }
                 val filterResults = FilterResults()
-                filterResults.values = defaultGameList
+                filterResults.values = gameList
                 return filterResults
             }
 
             override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
-                defaultGameList = results?.values as ArrayList<GameListEntry>
+                gameList = results?.values as ArrayList<GameListEntry>
                 notifyDataSetChanged()
             }
         }
@@ -78,19 +79,21 @@ class GameListAdapter(private val gameList: ArrayList<GameListEntry>) :
     fun clearFilter() = filter.filter("")
 
     fun updateGameList(newList: List<GameListEntry>) {
-        gameList.clear()
-        gameList.addAll(newList)
-        defaultGameList.clear()
-        if (newList.size > 3)
-            defaultGameList.addAll(newList.takeLast(newList.size - 3))
-        notifyDataSetChanged()
+        if (newList.size > 3) {
+            val diffCallBack = GameListDiffCallBack(gameList, newList)
+            val diffResult = DiffUtil.calculateDiff(diffCallBack)
+            diffResult.dispatchUpdatesTo(this)
+            val croppedNewList = newList.takeLast(newList.size - 3)
+            this.gameList = croppedNewList as ArrayList<GameListEntry>
+            this.defaultGameList = newList as ArrayList<GameListEntry>
+        }
     }
 
     inner class GameListViewHolder(var binding: ItemGameListBinding) :
         RecyclerView.ViewHolder(binding.root) {
         init {
             binding.containerCardView.setOnClickListener {
-                containerCardViewOnClick?.invoke(defaultGameList[adapterPosition], it)
+                containerCardViewOnClick?.invoke(gameList[adapterPosition], it)
             }
         }
 

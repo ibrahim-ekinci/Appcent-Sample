@@ -3,7 +3,7 @@ package com.gloorystudio.appcent_sample.ui.game_list
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.gloorystudio.appcent_sample.data.remote.models.GameListEntry
+import com.gloorystudio.appcent_sample.data.models.GameListEntry
 import com.gloorystudio.appcent_sample.data.repository.GameRepository
 import com.gloorystudio.appcent_sample.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel

@@ -1,6 +1,5 @@
-package com.gloorystudio.appcent_sample.ui.game_list
+package com.gloorystudio.appcent_sample.ui.adapters
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,8 +7,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager.widget.ViewPager
 import com.gloorystudio.appcent_sample.R
-import com.gloorystudio.appcent_sample.data.remote.models.GameListEntry
-import com.gloorystudio.appcent_sample.databinding.ItemGameListBinding
+import com.gloorystudio.appcent_sample.data.models.GameListEntry
 import com.gloorystudio.appcent_sample.databinding.ItemViewPagerBinding
 
 class ViewPagerAdapter(private val gameList:ArrayList<GameListEntry>) : PagerAdapter() {

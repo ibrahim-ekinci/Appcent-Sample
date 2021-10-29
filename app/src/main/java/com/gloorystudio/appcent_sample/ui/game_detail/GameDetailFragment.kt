@@ -11,14 +11,31 @@ import dagger.hilt.android.AndroidEntryPoint
 class GameDetailFragment : BaseFragment<FragmentGameDetailBinding>(R.layout.fragment_game_detail) {
 
     private val viewModel: GameDetailViewModel by viewModels()
+    private var isLiked = false
 
     override fun initUi() {
         arguments?.let {
             val myArgs = GameDetailFragmentArgs.fromBundle(it)
             viewModel.fetchGameData(myArgs.gameId)
-        }
-        binding.ivLike.setOnClickListener {
-
+            viewModel.getFavoriteGame(myArgs.gameId) { isLiked ->
+                this.isLiked = isLiked
+                if (isLiked){
+                    binding.ivLike.setImageResource(R.drawable.ic_unlike)
+                }else{
+                    binding.ivLike.setImageResource(R.drawable.ic_like)
+                }
+            }
+            binding.ivLike.setOnClickListener {
+                isLiked = if (isLiked) {
+                    viewModel.removeFavoriteGame(myArgs.gameId)
+                    binding.ivLike.setImageResource(R.drawable.ic_like)
+                    false
+                } else {
+                    viewModel.addGameFavorite()
+                    binding.ivLike.setImageResource(R.drawable.ic_unlike)
+                    true
+                }
+            }
         }
     }
 

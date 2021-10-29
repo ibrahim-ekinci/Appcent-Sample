@@ -12,7 +12,7 @@
         <entry key="app/src/main/res/drawable/progres_anim.xml" value="0.2175925925925926" />
         <entry key="app/src/main/res/drawable/progress_animation.xml" value="0.2175925925925926" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/fragment_game_detail.xml" value="0.41684064022268613" />
+        <entry key="app/src/main/res/layout/fragment_game_detail.xml" value="0.22" />
         <entry key="app/src/main/res/layout/fragment_game_favorite_list.xml" value="0.31197916666666664" />
         <entry key="app/src/main/res/layout/fragment_game_list.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_splash.xml" value="0.225" />

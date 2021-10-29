@@ -6,6 +6,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.gloorystudio.appcent_sample.R
 import com.gloorystudio.appcent_sample.base.BaseFragment
 import com.gloorystudio.appcent_sample.databinding.FragmentGameListBinding
+import com.gloorystudio.appcent_sample.ui.adapters.GameListAdapter
+import com.gloorystudio.appcent_sample.ui.adapters.ViewPagerAdapter
 import com.gloorystudio.appcent_sample.util.navigate
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -33,9 +35,7 @@ class GameListFragment : BaseFragment<FragmentGameListBinding>(R.layout.fragment
 
         binding.svGameSearch.setOnQueryTextListener(object :
             androidx.appcompat.widget.SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                return false
-            }
+            override fun onQueryTextSubmit(query: String?): Boolean = false
 
             override fun onQueryTextChange(newText: String): Boolean {
                 if (newText.length > 2) {

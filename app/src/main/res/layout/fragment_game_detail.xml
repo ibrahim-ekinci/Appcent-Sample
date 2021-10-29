@@ -6,7 +6,7 @@
     <data>
         <variable
             name="game"
-            type="com.gloorystudio.appcent_sample.data.remote.models.GameDetailEntry" />
+            type="com.gloorystudio.appcent_sample.data.models.GameDetailEntry" />
     </data>
 
     <ScrollView

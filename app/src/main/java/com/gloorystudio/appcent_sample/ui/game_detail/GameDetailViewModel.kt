@@ -3,7 +3,8 @@ package com.gloorystudio.appcent_sample.ui.game_detail
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.gloorystudio.appcent_sample.data.remote.models.GameDetailEntry
+import com.gloorystudio.appcent_sample.data.local.db.entity.GameFavoriteEntity
+import com.gloorystudio.appcent_sample.data.models.GameDetailEntry
 import com.gloorystudio.appcent_sample.data.repository.GameRepository
 import com.gloorystudio.appcent_sample.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -44,6 +45,36 @@ class GameDetailViewModel @Inject constructor(
                     isLoading.value = false
                 }
             }
+        }
+    }
+
+    fun getFavoriteGame(id: Int, isLiked: (Boolean)->Unit) {
+        viewModelScope.launch {
+           isLiked.invoke(repository.isGameFavoriteToDb(id))
+        }
+    }
+
+    fun addGameFavorite(){
+        gameData.value?.let { gameDetailEntry ->
+            viewModelScope.launch {
+                repository.addGameFavoriteToDb(
+                    GameFavoriteEntity(
+                        gameDetailEntry.id,
+                        gameDetailEntry.name,
+                        gameDetailEntry.image,
+                        gameDetailEntry.rating,
+                        gameDetailEntry.released,
+                        gameDetailEntry.metaCriticRate,
+                        gameDetailEntry.description
+                    )
+                )
+            }
+        }
+    }
+
+    fun removeFavoriteGame(id: Int){
+        viewModelScope.launch {
+            repository.deleteGameFavoriteToDb(id)
         }
     }
 }

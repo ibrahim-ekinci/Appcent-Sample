@@ -6,7 +6,7 @@
     <data>
         <variable
             name="game"
-            type="com.gloorystudio.appcent_sample.data.remote.models.GameListEntry" />
+            type="com.gloorystudio.appcent_sample.data.models.GameListEntry" />
     </data>
 
     <com.google.android.material.card.MaterialCardView

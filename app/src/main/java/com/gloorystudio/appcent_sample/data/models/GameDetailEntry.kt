@@ -1,4 +1,4 @@
-package com.gloorystudio.appcent_sample.data.remote.models
+package com.gloorystudio.appcent_sample.data.models
 
 data class GameDetailEntry(
     val id: Int,

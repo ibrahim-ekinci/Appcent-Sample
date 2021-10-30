@@ -30,6 +30,8 @@ class MainActivity : AppCompatActivity() {
 
     fun showLoading(isVisible: Boolean) {
         binding.progressBar.visibility = if (isVisible) View.VISIBLE else View.GONE
+        binding.navMainHostFragment.visibility = if (isVisible) View.GONE else View.VISIBLE
+        binding.bottomNavigationView.visibility = if (isVisible) View.GONE else View.VISIBLE
     }
 
     companion object {

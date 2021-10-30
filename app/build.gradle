@@ -8,14 +8,14 @@ plugins {
 }
 
 android {
-    compileSdk 31
+    compileSdk AndroidSdk.compile
 
     defaultConfig {
         applicationId "com.gloorystudio.appcent_sample"
-        minSdk 21
-        targetSdk 31
-        versionCode 1
-        versionName "1.0"
+        minSdk AndroidSdk.min
+        targetSdk AndroidSdk.target
+        versionCode AndroidSdk.versionCode
+        versionName AndroidSdk.versionName
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -40,64 +40,62 @@ android {
 
 dependencies {
 
-    def room_version = '2.3.0'
-
-    implementation 'androidx.core:core-ktx:1.6.0'
-    implementation 'androidx.appcompat:appcompat:1.3.1'
-    implementation 'com.google.android.material:material:1.4.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.1'
-    implementation 'androidx.databinding:databinding-runtime:7.0.3'
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
-
-    implementation 'androidx.fragment:fragment-ktx:1.3.6'
+    implementation(Libraries.coreKtx)
+    implementation(Libraries.appCompat)
+    implementation(Libraries.material)
+    implementation(Libraries.constraintLayout)
+    implementation(Libraries.dataBindingRuntime)
+    implementation(Libraries.legacySupportV4)
+    testImplementation(Libraries.junit)
+    androidTestImplementation(Libraries.junitExt)
+    androidTestImplementation(Libraries.espresso)
+    implementation(Libraries.fragmentKtx)
 
     // Timber
-    implementation 'com.jakewharton.timber:timber:4.7.1'
+    implementation(Libraries.timber)
 
     // Coroutines
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2'
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2'
+    implementation(Libraries.coroutinesCore)
+    implementation(Libraries.coroutinesAndroid)
 
     // Coroutine Lifecycle Scopes
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1"
-    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.3.1"
-    implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
+    implementation(Libraries.lifecycleViewModelKtx)
+    implementation(Libraries.lifecycleRuntimeKtx)
+    implementation(Libraries.lifecycleExt)
 
     // Retrofit
-    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
-    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
-    implementation "com.squareup.okhttp3:okhttp:4.9.1"
-    implementation "com.squareup.okhttp3:logging-interceptor:4.9.1"
+    implementation(Libraries.retrofit)
+    implementation(Libraries.converterGson)
+    implementation(Libraries.okhttp)
+    implementation(Libraries.loggingInterceptor)
 
     //Dagger - Hilt
-    implementation "com.google.dagger:hilt-android:2.39.1"
-    kapt "com.google.dagger:hilt-android-compiler:2.39.1"
-    implementation "androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03"
-    kapt "androidx.hilt:hilt-compiler:1.0.0"
+    implementation(Libraries.hiltAndroid)
+    kapt(Libraries.hiltAndroidCompiler)
+    implementation(Libraries.hiltLifecycleViewModel)
+    kapt(Libraries.hiltAndroidCompiler)
 
     //Navigation
-    implementation("androidx.navigation:navigation-fragment-ktx:2.3.5")
-    implementation("androidx.navigation:navigation-ui-ktx:2.3.5")
+    implementation(Libraries.navigationFragmentKtx)
+    implementation(Libraries.navigationUiKtx)
 
     //Picasso
-    implementation 'com.squareup.picasso:picasso:2.71828'
-
-    //Views
-    implementation 'de.hdodenhof:circleimageview:3.1.0'
-    implementation 'com.tbuonomo.andrui:viewpagerdotsindicator:3.0.3'
+    implementation(Libraries.picasso)
 
     //Room
-    implementation("androidx.room:room-runtime:$room_version") {
+    implementation(Libraries.roomRuntime){
         exclude(group:'org.xerial')
     }
-    kapt("androidx.room:room-compiler:$room_version"){
+    kapt(Libraries.roomCompiler){
         exclude(group:'org.xerial')
     }
-    implementation("androidx.room:room-ktx:$room_version"){
+    implementation(Libraries.roomKtx){
         exclude(group:'org.xerial')
     }
-    implementation 'org.xerial:sqlite-jdbc:3.34.0'
+    implementation(Libraries.sqliteJdbc)
+
+    //Views
+    implementation(Libraries.circleImageView)
+    implementation(Libraries.viewPagerDotsIndicator)
+
 }

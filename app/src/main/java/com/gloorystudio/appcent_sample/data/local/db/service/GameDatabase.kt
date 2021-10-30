@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.gloorystudio.appcent_sample.data.local.db.entity.GameFavoriteEntity
 
-@Database(entities = [GameFavoriteEntity::class], version = 1)
+@Database(entities = [GameFavoriteEntity::class], version = 1, exportSchema = false)
 abstract class GameDatabase : RoomDatabase() {
 
     abstract fun gameDao(): GameDao

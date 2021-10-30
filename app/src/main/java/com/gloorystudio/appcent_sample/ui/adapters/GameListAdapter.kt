@@ -28,6 +28,10 @@ class GameListAdapter(private var gameList: ArrayList<GameListEntry>) :
     fun onClickItem(actionFragmentList: (GameListEntry, View) -> Unit) {
         this.containerCardViewOnClick = actionFragmentList
     }
+    private var onAfterSearch: ((isListEmpty:Boolean) -> Unit)? = null
+    fun onAfterSearch(onAfterSearch: (isListEmpty:Boolean) -> Unit) {
+        this.onAfterSearch = onAfterSearch
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GameListViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -70,8 +74,11 @@ class GameListAdapter(private var gameList: ArrayList<GameListEntry>) :
             }
 
             override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
-                gameList = results?.values as ArrayList<GameListEntry>
-                notifyDataSetChanged()
+                results?.values?.let {
+                    gameList = results.values as ArrayList<GameListEntry>
+                    notifyDataSetChanged()
+                    onAfterSearch?.invoke(gameList.isEmpty())
+                }
             }
         }
     }

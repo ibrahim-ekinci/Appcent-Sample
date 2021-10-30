@@ -23,7 +23,7 @@ class GameListViewModel @Inject constructor(
         fetchGameList()
     }
 
-    fun fetchGameList() {
+    private fun fetchGameList() {
         viewModelScope.launch {
             isLoading.value = true
             when (val result = repository.getGameList()) {

@@ -11,10 +11,6 @@ import com.gloorystudio.appcent_sample.ui.adapters.GameListAdapter
 import com.gloorystudio.appcent_sample.ui.adapters.ViewPagerAdapter
 import com.gloorystudio.appcent_sample.util.navigate
 import dagger.hilt.android.AndroidEntryPoint
-import androidx.core.widget.NestedScrollView
-
-
-
 
 
 @AndroidEntryPoint
@@ -30,6 +26,9 @@ class GameListFragment : BaseFragment<FragmentGameListBinding>(R.layout.fragment
         gameListAdapter.onClickItem { game, view ->
             GameListFragmentDirections.actionGameListFragmentToGameDetailFragment(game.id)
                 .navigate(view)
+        }
+        gameListAdapter.onAfterSearch { isListEmpty ->
+            binding.tvNotFound.visibility = if (isListEmpty) View.VISIBLE else View.GONE
         }
 
         binding.vpSlider.adapter = viewPagerAdapter

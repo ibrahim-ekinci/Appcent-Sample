@@ -14,7 +14,7 @@ class GameFavoriteListViewModel @Inject constructor(
     private val repository: GameRepository
 ) : ViewModel() {
 
-    var gameList = MutableLiveData<List<GameListEntry>>(listOf())
+    var gameList = MutableLiveData<ArrayList<GameListEntry>>(arrayListOf())
 
     init {
         getFavoriteGameList()

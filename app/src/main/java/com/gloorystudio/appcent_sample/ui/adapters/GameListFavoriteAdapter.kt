@@ -35,11 +35,11 @@ class GameListFavoriteAdapter(private var gameList: ArrayList<GameListEntry>) :
 
     override fun getItemCount(): Int = gameList.size
 
-    fun updateGameList(newList: List<GameListEntry>) {
+    fun updateGameList(newList: ArrayList<GameListEntry>) {
         val diffCallBack = GameListDiffCallBack(gameList, newList)
         val diffResult = DiffUtil.calculateDiff(diffCallBack)
         diffResult.dispatchUpdatesTo(this)
-        this.gameList = newList as ArrayList<GameListEntry>
+        this.gameList = newList
     }
 
     inner class GameListViewHolder(var binding: ItemGameListBinding) :

@@ -1,5 +1,6 @@
 package com.gloorystudio.appcent_sample.ui.game_fav_list
 
+import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.gloorystudio.appcent_sample.R
@@ -28,9 +29,8 @@ class GameFavoriteListFragment :
 
     override fun observeData() {
         viewModel.gameList.observe(viewLifecycleOwner, { gameList ->
-            if (gameList.isNotEmpty()) {
-                gameListFavoriteAdapter.updateGameList(gameList)
-            }
+            binding.tvNotFound.visibility = if (gameList.isEmpty()) View.VISIBLE else View.GONE
+            gameListFavoriteAdapter.updateGameList(gameList)
         })
     }
 

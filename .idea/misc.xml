@@ -20,7 +20,7 @@
         <entry key="app/src/main/res/layout/fragment_game_list.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_splash.xml" value="0.225" />
         <entry key="app/src/main/res/layout/item_game_list.xml" value="0.5" />
-        <entry key="app/src/main/res/layout/item_view_pager.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/item_view_pager.xml" value="0.2719033232628399" />
         <entry key="app/src/main/res/layout/slider_item.xml" value="0.21481481481481482" />
         <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.21481481481481482" />
       </map>

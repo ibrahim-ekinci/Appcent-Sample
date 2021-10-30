@@ -11,7 +11,6 @@ interface GameApi {
 
     @GET("games")
     suspend fun getGameList(
-        @Query("page") page: Int,
         @Query("key") key:String = API_KEY
     ): GameList
 

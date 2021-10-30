@@ -15,12 +15,9 @@ class GameListViewModel @Inject constructor(
     private val repository: GameRepository
 ) : ViewModel() {
 
-    private var curPage = 1
-
     var gameList = MutableLiveData<List<GameListEntry>>(listOf())
     var loadError = MutableLiveData("")
     var isLoading = MutableLiveData(false)
-    var endReached = MutableLiveData(false)
 
     init {
         fetchGameList()
@@ -29,22 +26,22 @@ class GameListViewModel @Inject constructor(
     fun fetchGameList() {
         viewModelScope.launch {
             isLoading.value = true
-            when (val result = repository.getGameList(curPage)) {
+            when (val result = repository.getGameList()) {
                 is Resource.Success -> {
-                    endReached.value = result.data!!.count == 0
-                    val gameListEntry = result.data.results.mapIndexed { _, entry ->
-                        GameListEntry(
-                            entry.id,
-                            entry.name,
-                            entry.background_image,
-                            entry.rating,
-                            entry.released
-                        )
+                    result.data?.let {
+                        val gameListEntry = result.data.results.mapIndexed { _, entry ->
+                            GameListEntry(
+                                entry.id,
+                                entry.name,
+                                entry.background_image,
+                                entry.rating,
+                                entry.released
+                            )
+                        }
+                        loadError.value = ""
+                        isLoading.value = false
+                        gameList.value = gameList.value?.plus(gameListEntry)
                     }
-                    curPage++
-                    loadError.value = ""
-                    isLoading.value = false
-                    gameList.value = gameList.value?.plus(gameListEntry)
                 }
                 is Resource.Error -> {
                     loadError.value = result.message!!

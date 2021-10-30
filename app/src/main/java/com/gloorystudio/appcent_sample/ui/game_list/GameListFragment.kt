@@ -56,17 +56,6 @@ class GameListFragment : BaseFragment<FragmentGameListBinding>(R.layout.fragment
                 return false
             }
         })
-        /*
-        binding.nestedScrollView.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY ->
-            if (v.getChildAt(v.childCount - 1) != null) {
-                if (scrollY > oldScrollY) {
-                    if (scrollY >= v.getChildAt(v.childCount - 1).measuredHeight - v.measuredHeight) {
-                        viewModel.fetchGameList()
-                    }
-                }
-            }
-        })
-         */
     }
 
     override fun observeData() {

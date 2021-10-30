@@ -14,9 +14,9 @@ class GameRepository @Inject constructor(
     private val api: GameApi,
     private val dao: GameDao
 ) {
-    suspend fun getGameList(page: Int = 1): Resource<GameList> {
+    suspend fun getGameList(): Resource<GameList> {
         val response = try {
-            api.getGameList(page)
+            api.getGameList()
         } catch (e: Exception) {
             return Resource.Error(
                 e.message.toString()
